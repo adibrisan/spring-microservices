@@ -14,6 +14,9 @@
 
   <modules>
     <module>customer</module>
+      <module>fraud</module>
+      <module>fraud</module>
+      <module>fraud</module>
   </modules>
 
   <properties>
