@@ -1,13 +1,15 @@
 package com.adimicroservices.customer;
 
+import com.adimicroservices.amqp.RabbitMQMessageProducer;
 import com.adimicroservices.clients.fraud.FraudCheckResponse;
 import com.adimicroservices.clients.fraud.FraudClient;
-import com.adimicroservices.clients.notification.NotificationClient;
 import com.adimicroservices.clients.notification.NotificationRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-public record CustomerService(CustomerRepository customerRepository, NotificationClient notificationClient, FraudClient fraudClient) {
+public record CustomerService(CustomerRepository customerRepository, FraudClient fraudClient, RabbitMQMessageProducer rabbitMQMessageProducer) {
+
+
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
                 .firstName(request.firstName())
@@ -29,14 +31,18 @@ public record CustomerService(CustomerRepository customerRepository, Notificatio
         if(fraudCheckResponse.isFraudster()){
             throw new IllegalStateException("fraudster");
         }
-        // todo: make it async. i.e add to queue
-        notificationClient.sendNotification(
-                new NotificationRequest(
-                        customer.getId(),
-                        customer.getEmail(),
-                        String.format("Hi %s, welcome to Adi brisan code...",
-                                customer.getFirstName())
-                )
+
+        NotificationRequest notificationRequest = new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s, welcome to Adi brisan code...",
+                        customer.getFirstName())
+        );
+
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
         );
     }
 }
