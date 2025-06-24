@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRES_DB: adibrisan
+  POSTGRES_USER: adibrisan
+  POSTGRES_PASSWORD: password
+  
