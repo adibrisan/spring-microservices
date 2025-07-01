@@ -6,4 +6,3 @@ data:
   POSTGRES_DB: adibrisan
   POSTGRES_USER: adibrisan
   POSTGRES_PASSWORD: password
-  
