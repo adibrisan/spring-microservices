@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/fraud/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/eureka-server/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/clients/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/notification/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/apigw/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/amqp/src/main/resources/archetype-resources" includeSubdirectories="true" />
-    </excludeFromCompile>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -22,10 +13,9 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
-        <module name="notification" />
         <module name="apigw" />
+        <module name="notification" />
         <module name="clients" />
         <module name="amqp" />
         <module name="fraud" />
@@ -34,7 +24,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="amigosservices" target="17" />
+      <module name="amqp" target="17" />
+      <module name="apigw" target="17" />
+      <module name="clients" target="17" />
+      <module name="customer" target="17" />
+      <module name="eureka-server" target="17" />
+      <module name="fraud" target="17" />
+      <module name="my-microservices" target="17" />
+      <module name="notification" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
